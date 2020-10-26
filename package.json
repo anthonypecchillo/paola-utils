@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/hackreactor/paola-utils#readme",
   "dependencies": {
+    "bottleneck": "^2.19.5",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
+    "google-spreadsheet": "^3.0.13",
     "googleapis": "^49.0.0",
     "jsforce": "^1.9.3",
     "node-fetch": "^2.6.0"
