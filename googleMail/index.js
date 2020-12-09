@@ -2,11 +2,17 @@
 // GMail API Integrations
 // ------------------------------
 
+require('dotenv').config();
 const { google } = require('googleapis');
-const key = require('../../google/gmail_client_secret.json');
 
 const scopes = ['https://mail.google.com/'];
-const jwt = new google.auth.JWT(key.client_email, null, key.private_key, scopes, 'paola@galvanize.com');
+const jwt = new google.auth.JWT(
+  process.env.GMAIL_CLIENT_EMAIL,
+  null,
+  process.env.GMAIL_PRIVATE_KEY,
+  scopes,
+  'paola@galvanize.com',
+);
 
 const authenticate = async () => {
   await jwt.authorize((err, token) => {
