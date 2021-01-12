@@ -64,3 +64,19 @@ exports.getStudents = async (courseStart, courseType) => {
     return error;
   }
 };
+
+exports.getStudentsByReportID = async (reportID) => {
+  try {
+    await login();
+    const report = conn.analytics.report(reportID);
+    return await report.execute({ details: true }, (err, result) => {
+      if (err) throw new Error('SALESFORCE ERROR', err);
+      const { rows } = result.factMap['T!T'];
+      const formattedStudents = rows.map((row) => result.reportMetadata.detailColumns
+        .reduce((a, b, i) => (a[b] = row.dataCells[i].value, a), {}));
+      return formattedStudents;
+    });
+  } catch (error) {
+    return error;
+  }
+};
